@@ -9,6 +9,7 @@ public class Mahasiswa implements Serializable {
     private int idMahasiswa;
     private String nim;
     private String namaMahasiswa;
+    private String programStudi;
     private String email;
     private String noTelpon;
     private String alamat;
@@ -20,23 +21,20 @@ public class Mahasiswa implements Serializable {
     public Mahasiswa() {
     }
     
-    public Mahasiswa(String nim, String namaMahasiswa, String email, String noTelpon,
-                     String alamat, Date tanggalLahir, String jenisKelamin, String status) {
+    public Mahasiswa(String nim, String namaMahasiswa, String programStudi, String jenisKelamin, String status) {
         this.nim = nim;
         this.namaMahasiswa = namaMahasiswa;
-        this.email = email;
-        this.noTelpon = noTelpon;
-        this.alamat = alamat;
-        this.tanggalLahir = tanggalLahir;
+        this.programStudi = programStudi;
         this.jenisKelamin = jenisKelamin;
         this.status = status;
     }
     
-    public Mahasiswa(int idMahasiswa, String nim, String namaMahasiswa, String email, 
+    public Mahasiswa(int idMahasiswa, String nim, String namaMahasiswa, String programStudi, String email, 
                      String noTelpon, String alamat, Date tanggalLahir, String jenisKelamin, String status) {
         this.idMahasiswa = idMahasiswa;
         this.nim = nim;
         this.namaMahasiswa = namaMahasiswa;
+        this.programStudi = programStudi;
         this.email = email;
         this.noTelpon = noTelpon;
         this.alamat = alamat;
@@ -68,6 +66,14 @@ public class Mahasiswa implements Serializable {
     
     public void setNamaMahasiswa(String namaMahasiswa) {
         this.namaMahasiswa = namaMahasiswa;
+    }
+    
+    public String getProgramStudi() {
+        return programStudi;
+    }
+    
+    public void setProgramStudi(String programStudi) {
+        this.programStudi = programStudi;
     }
     
     public String getEmail() {
@@ -124,10 +130,10 @@ public class Mahasiswa implements Serializable {
                 "idMahasiswa=" + idMahasiswa +
                 ", nim='" + nim + '\'' +
                 ", namaMahasiswa='" + namaMahasiswa + '\'' +
+                ", programStudi='" + programStudi + '\'' +
                 ", email='" + email + '\'' +
                 ", noTelpon='" + noTelpon + '\'' +
                 ", alamat='" + alamat + '\'' +
-                ", tanggalLahir=" + tanggalLahir +
                 ", jenisKelamin='" + jenisKelamin + '\'' +
                 ", status='" + status + '\'' +
                 '}';
