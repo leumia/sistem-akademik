@@ -17,18 +17,15 @@ public class MataKuliah implements Serializable {
     public MataKuliah() {
     }
     
-    public MataKuliah(String kodeMataKuliah, String namaMataKuliah, int sks, 
-                      int semester, String dosenPengampu, String deskripsi) {
+    public MataKuliah(String kodeMataKuliah, String namaMataKuliah, int sks, int semester) {
         this.kodeMataKuliah = kodeMataKuliah;
         this.namaMataKuliah = namaMataKuliah;
         this.sks = sks;
         this.semester = semester;
-        this.dosenPengampu = dosenPengampu;
-        this.deskripsi = deskripsi;
     }
     
-    public MataKuliah(int idMataKuliah, String kodeMataKuliah, String namaMataKuliah, 
-                      int sks, int semester, String dosenPengampu, String deskripsi) {
+    public MataKuliah(int idMataKuliah, String kodeMataKuliah, String namaMataKuliah, int sks, 
+                      int semester, String dosenPengampu, String deskripsi) {
         this.idMataKuliah = idMataKuliah;
         this.kodeMataKuliah = kodeMataKuliah;
         this.namaMataKuliah = namaMataKuliah;
