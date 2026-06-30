@@ -10,20 +10,21 @@ public class MahasiswaDAO {
     
     // CREATE - Insert data mahasiswa
     public boolean insert(Mahasiswa mahasiswa) {
-        String sql = "INSERT INTO mahasiswa (nim, nama_mahasiswa, email, no_telpon, alamat, tanggal_lahir, jenis_kelamin, status) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO mahasiswa (nim, nama_mahasiswa, program_studi, email, no_telpon, alamat, tanggal_lahir, jenis_kelamin, status) " +
+                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             
             pstmt.setString(1, mahasiswa.getNim());
             pstmt.setString(2, mahasiswa.getNamaMahasiswa());
-            pstmt.setString(3, mahasiswa.getEmail());
-            pstmt.setString(4, mahasiswa.getNoTelpon());
-            pstmt.setString(5, mahasiswa.getAlamat());
-            pstmt.setDate(6, mahasiswa.getTanggalLahir());
-            pstmt.setString(7, mahasiswa.getJenisKelamin());
-            pstmt.setString(8, mahasiswa.getStatus());
+            pstmt.setString(3, mahasiswa.getProgramStudi());
+            pstmt.setString(4, mahasiswa.getEmail());
+            pstmt.setString(5, mahasiswa.getNoTelpon());
+            pstmt.setString(6, mahasiswa.getAlamat());
+            pstmt.setDate(7, mahasiswa.getTanggalLahir());
+            pstmt.setString(8, mahasiswa.getJenisKelamin());
+            pstmt.setString(9, mahasiswa.getStatus());
             
             return pstmt.executeUpdate() > 0;
         } catch (SQLException | ClassNotFoundException e) {
@@ -46,6 +47,7 @@ public class MahasiswaDAO {
                     rs.getInt("id_mahasiswa"),
                     rs.getString("nim"),
                     rs.getString("nama_mahasiswa"),
+                    rs.getString("program_studi"),
                     rs.getString("email"),
                     rs.getString("no_telpon"),
                     rs.getString("alamat"),
@@ -75,6 +77,7 @@ public class MahasiswaDAO {
                         rs.getInt("id_mahasiswa"),
                         rs.getString("nim"),
                         rs.getString("nama_mahasiswa"),
+                        rs.getString("program_studi"),
                         rs.getString("email"),
                         rs.getString("no_telpon"),
                         rs.getString("alamat"),
@@ -104,6 +107,7 @@ public class MahasiswaDAO {
                         rs.getInt("id_mahasiswa"),
                         rs.getString("nim"),
                         rs.getString("nama_mahasiswa"),
+                        rs.getString("program_studi"),
                         rs.getString("email"),
                         rs.getString("no_telpon"),
                         rs.getString("alamat"),
@@ -121,7 +125,7 @@ public class MahasiswaDAO {
     
     // UPDATE - Update data mahasiswa
     public boolean update(Mahasiswa mahasiswa) {
-        String sql = "UPDATE mahasiswa SET nim=?, nama_mahasiswa=?, email=?, no_telpon=?, " +
+        String sql = "UPDATE mahasiswa SET nim=?, nama_mahasiswa=?, program_studi=?, email=?, no_telpon=?, " +
                      "alamat=?, tanggal_lahir=?, jenis_kelamin=?, status=? WHERE id_mahasiswa=?";
         
         try (Connection conn = DatabaseConnection.getConnection();
@@ -129,13 +133,14 @@ public class MahasiswaDAO {
             
             pstmt.setString(1, mahasiswa.getNim());
             pstmt.setString(2, mahasiswa.getNamaMahasiswa());
-            pstmt.setString(3, mahasiswa.getEmail());
-            pstmt.setString(4, mahasiswa.getNoTelpon());
-            pstmt.setString(5, mahasiswa.getAlamat());
-            pstmt.setDate(6, mahasiswa.getTanggalLahir());
-            pstmt.setString(7, mahasiswa.getJenisKelamin());
-            pstmt.setString(8, mahasiswa.getStatus());
-            pstmt.setInt(9, mahasiswa.getIdMahasiswa());
+            pstmt.setString(3, mahasiswa.getProgramStudi());
+            pstmt.setString(4, mahasiswa.getEmail());
+            pstmt.setString(5, mahasiswa.getNoTelpon());
+            pstmt.setString(6, mahasiswa.getAlamat());
+            pstmt.setDate(7, mahasiswa.getTanggalLahir());
+            pstmt.setString(8, mahasiswa.getJenisKelamin());
+            pstmt.setString(9, mahasiswa.getStatus());
+            pstmt.setInt(10, mahasiswa.getIdMahasiswa());
             
             return pstmt.executeUpdate() > 0;
         } catch (SQLException | ClassNotFoundException e) {
@@ -162,7 +167,7 @@ public class MahasiswaDAO {
     // SEARCH - Search mahasiswa by name or NIM
     public List<Mahasiswa> search(String keyword) {
         List<Mahasiswa> list = new ArrayList<>();
-        String sql = "SELECT * FROM mahasiswa WHERE nim LIKE ? OR nama_mahasiswa LIKE ? ORDER BY id_mahasiswa DESC";
+        String sql = "SELECT * FROM mahasiswa WHERE nim LIKE ? OR nama_mahasiswa LIKE ? OR program_studi LIKE ? ORDER BY id_mahasiswa DESC";
         
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -170,6 +175,7 @@ public class MahasiswaDAO {
             String searchKeyword = "%" + keyword + "%";
             pstmt.setString(1, searchKeyword);
             pstmt.setString(2, searchKeyword);
+            pstmt.setString(3, searchKeyword);
             
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
@@ -177,6 +183,7 @@ public class MahasiswaDAO {
                         rs.getInt("id_mahasiswa"),
                         rs.getString("nim"),
                         rs.getString("nama_mahasiswa"),
+                        rs.getString("program_studi"),
                         rs.getString("email"),
                         rs.getString("no_telpon"),
                         rs.getString("alamat"),
